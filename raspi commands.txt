@@ -1,0 +1,5 @@
+login:	ssh pi@raspberrypi
+
+deploy: ng build --base-href
+	scp -r part-finder-app/ pi@raspberrypi:/var/lib/tomcat8/webapps
+	(ausführen von /dist Ordner)
