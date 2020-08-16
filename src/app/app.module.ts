@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +13,6 @@ import { PartsComponent } from './components/parts.component/parts.component';
 import { PartListComponent } from './components/parts.component/part-list.component/part-list.component';
 import { PartComponent } from './components/parts.component/part-list.component/part.component/part.component';
 import { PartService } from './services/PartService';
-import { InputValidationDirective } from './directives/input.validation.directive';
-import { InputIsNumericValidationDirective } from './directives/input.is-numeric.validation.directive';
 
 
 @NgModule({
@@ -25,13 +24,12 @@ import { InputIsNumericValidationDirective } from './directives/input.is-numeric
         ActionPartModal,
         PartsComponent,
         PartListComponent,
-        PartComponent,
-        InputValidationDirective,
-        InputIsNumericValidationDirective
+        PartComponent
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        ReactiveFormsModule
     ],
     providers: [PartService],
     bootstrap: [AppComponent]

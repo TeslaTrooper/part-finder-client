@@ -1,12 +1,11 @@
-<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal" class="col-3 text-truncate">{{ part.name }}</td>
-<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal" class="col-3 text-truncate">{{ part.box }}</td>
-<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal" class="col-3 text-truncate">{{ part.qty }}</td>
-<td class="col-3 text-right">
-    <!-- <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#actionPartModal">
-        <span class="oi oi-menu"></span>
-    </button> -->
+<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal"
+    class="col-3 text-truncate">{{ part.name }}</td>
+<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal"
+    class="col-3 text-truncate">{{ part.box }}</td>
+<td (click)="openPartDetailModal()" style="cursor: pointer" data-toggle="modal" data-target="#actionPartModal"
+    class="col-3 text-truncate">{{ part.qty }}</td>
 
-    <!-- btn-group-vertical -->
+<td class="col-3 text-right">
     <div class="btn-group">
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPartModal"
             (click)="openPartEditModal()"><span class="oi oi-pencil"></span>
