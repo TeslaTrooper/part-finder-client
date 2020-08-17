@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Part } from 'src/app/model/part';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-parts',

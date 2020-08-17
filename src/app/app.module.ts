@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header.component/header.component';
 import { EditPartModal } from './modal.component/modal.edit.part.component/modal.edit.part.component';
 import { DeletePartModal } from './modal.component/modal.delete.part.component/modal.delete.part.component';
-import { ActionPartModal } from './modal.component/modal.detail.part.component/modal.detail.part.component';
+import { DetailPartModal } from './modal.component/modal.detail.part.component/modal.detail.part.component';
 import { PartsComponent } from './components/parts.component/parts.component';
 import { PartListComponent } from './components/parts.component/part-list.component/part-list.component';
 import { PartComponent } from './components/parts.component/part-list.component/part.component/part.component';
 import { PartService } from './services/PartService';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { PartService } from './services/PartService';
         HeaderComponent,
         EditPartModal,
         DeletePartModal,
-        ActionPartModal,
+        DetailPartModal,
         PartsComponent,
         PartListComponent,
         PartComponent
@@ -29,9 +30,10 @@ import { PartService } from './services/PartService';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgbModule
     ],
-    providers: [PartService],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [DetailPartModal, DeletePartModal, EditPartModal]
 })
 export class AppModule { }

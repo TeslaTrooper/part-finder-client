@@ -1,28 +1,39 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Part } from 'src/app/model/part';
 import { PartService } from 'src/app/services/PartService';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-edit-part-modal',
     templateUrl: './modal.edit.part.component.html',
     styleUrls: ['./modal.edit.part.component.scss']
 })
-export class EditPartModal {
+export class EditPartModal implements OnInit {
 
+    public editPartForm: FormGroup;
     public part: Part;
 
-    @ViewChild('box') box: ElementRef;
-    @ViewChild('qty') qty: ElementRef;
-
-    constructor(private partService: PartService) {
-        this.partService.partEdit.subscribe((id: number) => this.part = partService.get(id));
+    constructor(private partService: PartService, public activeModal: NgbActiveModal) {
+        this.editPartForm = new FormGroup({
+            box: new FormControl('', Validators.required),
+            qty: new FormControl('', [Validators.required, Validators.pattern('[1-9][0-9]*')])
+        })
     }
 
-    public partEdit(): void {
-        let tfBox: string = (this.box.nativeElement as HTMLInputElement).value;
-        let tfQty: string = (this.qty.nativeElement as HTMLInputElement).value;
+    ngOnInit(): void {
+        this.editPartForm.patchValue({
+            box: this.part.box,
+            qty:this.part.qty
+        })
+    }
+
+    public onPartEdit(): void {
+        let tfBox: string = this.editPartForm.value.box;
+        let tfQty: string = this.editPartForm.value.qty;
 
         this.partService.edit(this.part.id, tfBox, Number(tfQty));
+        this.activeModal.close();
     }
 
 }

@@ -1,32 +1,26 @@
-<div class="modal bd-example-modal-sm" id="editPartModal" tabindex="-1" role="dialog"
-    aria-labelledby="editPartModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPartModalTitle">{{ part?.name }} bearbeiten</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<form [formGroup]="editPartForm" (ngSubmit)="onPartEdit()">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-edit-title">{{ part?.name }} bearbeiten</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Fach</span>
             </div>
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Fach</span>
-                    </div>
-                    <input type="text" class="form-control" id="box" value="{{ part?.box }}" #box>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Anzahl</span>
-                    </div>
-                    <input type="text" class="form-control" id="qty" value="{{ part?.qty }}" #qty>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                    <button type="button" class="btn btn-primary" (click)="partEdit()"
-                        data-dismiss="modal">Speichern</button>
-                </div>
+            <input type="text" class="form-control" id="box" formControlName="box">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Anzahl</span>
             </div>
+            <input type="text" class="form-control" id="qty" formControlName="qty">
         </div>
     </div>
-</div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!editPartForm.valid">Speichern</button>
+        <button type="button" class="btn btn-secondary" (click)="activeModal.close('Cancel click')">Abbrechen</button>
+    </div>
+</form>

@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { PartService } from 'src/app/services/PartService';
 import { Part } from 'src/app/model/part';
 
@@ -8,18 +10,13 @@ import { Part } from 'src/app/model/part';
 })
 export class DeletePartModal {
 
-    public part: Part;
+    @Input() public part: Part;
 
-    constructor(private partService: PartService) {
-        this.partService.partDelete.subscribe((id: number) => this.part = partService.get(id));
-    }
+    constructor(private partService: PartService, public modalService: NgbActiveModal) { }
 
-    public partDelete(): void {
+    public onPartDelete(): void {
         this.partService.delete(this.part.id);
-    }
-
-    public getPartName(): string {
-        return this.part != undefined ? this.part.name : "";
+        this.modalService.close();
     }
 
 }
