@@ -13,3 +13,4 @@ export class ModalService {
 }
 
 export const SMALL_CENTERED_CONFIG: NgbModalOptions = { size: 'small', centered: true };
+export const SCROLLABLE_CONFIG: NgbModalOptions = { scrollable: true };

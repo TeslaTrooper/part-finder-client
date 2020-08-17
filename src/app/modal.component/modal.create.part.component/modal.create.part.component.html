@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-create-title">{{ part?.name }} erstellen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="createPartForm" (ngSubmit)="onPartCreate()">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Name</span>
+            </div>
+            <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Fach</span>
+            </div>
+            <input type="text" class="form-control" id="box" formControlName="box">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Anzahl</span>
+            </div>
+            <input type="text" class="form-control" id="qty" formControlName="qty">
+        </div>
+
+        <!-- Custom attribs -->
+        <div class="input-group mb-3" *ngFor="let item of [].constructor(10)">
+            <div class="input-group-prepend">
+                <input type="text" class="form-control" placeholder="Attribut">
+            </div>
+            <input type="text" class="form-control" placeholder="Wert">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" ngbAutoFocus class="btn btn-primary" [disabled]="!createPartForm.valid" (click)="onPartCreate()">Speichern</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Cancel click')">Abbrechen</button>
+</div>

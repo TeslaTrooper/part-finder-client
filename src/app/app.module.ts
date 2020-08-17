@@ -14,6 +14,7 @@ import { PartListComponent } from './components/parts.component/part-list.compon
 import { PartComponent } from './components/parts.component/part-list.component/part.component/part.component';
 import { PartService } from './services/PartService';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreatePartModal } from './modal.component/modal.create.part.component/modal.create.part.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DetailPartModal,
         PartsComponent,
         PartListComponent,
-        PartComponent
+        PartComponent,
+        CreatePartModal
     ],
     imports: [
         BrowserModule,

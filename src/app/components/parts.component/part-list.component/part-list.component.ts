@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 import { Part } from 'src/app/model/part';
 import { PartService } from 'src/app/services/PartService';
+import { CreatePartModal } from 'src/app/modal.component/modal.create.part.component/modal.create.part.component';
+import { ModalService, SCROLLABLE_CONFIG } from 'src/app/services/ModalService';
 
 @Component({
     selector: 'app-part-list',
@@ -13,7 +16,7 @@ export class PartListComponent {
     public parts: Part[];
     public newPartForm: FormGroup;
 
-    constructor(private partService: PartService) {
+    constructor(private partService: PartService, private modalService: ModalService) {
         this.partService.partListChanged.subscribe(() => this.parts = partService.getParts());
 
         this.newPartForm = new FormGroup({
@@ -28,7 +31,8 @@ export class PartListComponent {
         const box: string = this.newPartForm.value.box;
         const qty: number = this.newPartForm.value.qty;
 
-        this.partService.add(new Part(0, name, box, qty));
+        const ref: NgbModalRef = this.modalService.open(CreatePartModal, SCROLLABLE_CONFIG);
+        ref.componentInstance.part = new Part(0, name, box, qty);
 
         this.newPartForm.reset();
     }

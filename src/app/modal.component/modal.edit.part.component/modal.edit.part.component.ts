@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
     selector: 'app-edit-part-modal',
     templateUrl: './modal.edit.part.component.html',
-    styleUrls: ['./modal.edit.part.component.scss']
+    styleUrls: ['../modal.component.scss']
 })
 export class EditPartModal implements OnInit {
 
