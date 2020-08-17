@@ -1,18 +1,33 @@
-<form [formGroup]="newPartForm" (ngSubmit)="onCreatePart()" id="newPartForm">
-    <input type="text" class="form-control form-control-sm" placeholder="Teilename" formControlName="name">
-    <input type="text" class="form-control form-control-sm" placeholder="Fach" formControlName="box">
-    <input type="text" class="form-control form-control-sm" placeholder="Anz." formControlName="qty">
+<!-- Area for creating new parts -->
+<div class="container-fluid">
+    <form [formGroup]="newPartForm" (ngSubmit)="onCreatePart()" id="newPartForm" class="mb-3 mt-3">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control form-control-sm" placeholder="Teilename" formControlName="name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control form-control-sm" placeholder="Fach" formControlName="box">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control form-control-sm" placeholder="Anzahl" formControlName="qty">
+            </div>
+            <div class="col">
+                <div class="text-right">
+                    <button type="submit" [disabled]="!newPartForm.valid" class="btn btn-sm btn-primary">
+                        <span class="oi oi-plus"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
-    <button type="submit" [disabled]="!newPartForm.valid" class="btn btn-sm btn-primary">
-        <span class="oi oi-plus"></span>
-    </button>
-</form>
-
+<!-- Main area for listing all existing parts inside table -->
 <div class="container-fluid">
     <table class="table table-hover">
         <thead>
             <tr class="d-flex">
-                <th scope="col" class="col-3">Teilename</th>
+                <th scope="col" class="col-3">Teil</th>
                 <th scope="col" class="col-3">Fach</th>
                 <th scope="col" class="col-3">Anzahl</th>
                 <th scope="col" class="col-3 text-right">Aktion</th>
