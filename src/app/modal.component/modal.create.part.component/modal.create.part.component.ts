@@ -43,7 +43,19 @@ export class CreatePartModal implements OnInit {
         const box: string = this.createPartForm.value.box;
         const qty: number = this.createPartForm.value.qty;
 
-        this.partService.add(new Part(0, name, box, qty));
+        const attribs: Map<string, string> = new Map();
+        for (const formArrayIndex in this.formArrays) {
+            const attrib: AbstractControl = this.createPartForm.get('customAttribs_' + formArrayIndex + ".0");
+            const attribValue: AbstractControl = this.createPartForm.get('customAttribs_' + formArrayIndex + ".1");
+
+            if (attrib.value !== "" && attribValue.value !== "")
+                attribs.set(attrib.value, attribValue.value);
+        }
+
+        const part: Part = new Part(0, name, box, qty);
+        part.setAttribs(attribs);
+
+        this.partService.add(part);
         this.activeModal.close();
     }
 

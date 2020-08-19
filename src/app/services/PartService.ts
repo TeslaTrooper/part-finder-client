@@ -21,7 +21,6 @@ export class PartService {
         this.partDelete = new EventEmitter();
         this.partEdit = new EventEmitter();
         this.partListChanged = new EventEmitter();
-        console.log("PartService created...");
     }
 
     public add(part: Part): void {

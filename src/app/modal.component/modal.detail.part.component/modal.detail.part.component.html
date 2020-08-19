@@ -23,6 +23,14 @@
                     <p>{{part?.box}}</p>
                 </td>
             </tr>
+            <tr class="d-flex" *ngFor="let attrib of part.attribs | keyvalue">
+                <td class="col-6">
+                    <p><strong>{{attrib.key}}</strong></p>
+                </td>
+                <td class="col-6">
+                    <p>{{attrib.value}}</p>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
