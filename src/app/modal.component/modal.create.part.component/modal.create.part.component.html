@@ -26,11 +26,13 @@
         </div>
 
         <!-- Custom attribs -->
-        <div class="input-group mb-3" *ngFor="let item of [].constructor(10)">
-            <div class="input-group-prepend">
-                <input type="text" class="form-control" placeholder="Attribut">
+        <div *ngFor="let item of formArrays; let i = index" formArrayName="customAttribs_{{i}}">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <input type="text" formControlName="0" class="form-control" placeholder="Attribut" (keyup)="onCheckCustomAttribute($event, i)">
+                </div>
+                <input type="text" formControlName="1" class="form-control" placeholder="Wert" (keyup)="onCheckCustomAttribute($event, i)">
             </div>
-            <input type="text" class="form-control" placeholder="Wert">
         </div>
     </form>
 </div>
