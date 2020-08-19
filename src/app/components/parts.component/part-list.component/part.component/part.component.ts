@@ -5,7 +5,7 @@ import { Part } from 'src/app/shared/part';
 import { DetailPartModal } from 'src/app/modal.component/modal.detail.part.component/modal.detail.part.component';
 import { DeletePartModal } from 'src/app/modal.component/modal.delete.part.component/modal.delete.part.component';
 import { EditPartModal } from 'src/app/modal.component/modal.edit.part.component/modal.edit.part.component';
-import { ModalService, SMALL_CENTERED_CONFIG } from "src/app/services/ModalService";
+import { ModalService, SMALL_CENTERED_CONFIG, SCROLLABLE_CONFIG } from "src/app/services/ModalService";
 
 @Component({
     selector: '[app-part]',
@@ -28,7 +28,7 @@ export class PartComponent {
     }
 
     public openPartDetailModal(): void {
-        const ref: NgbModalRef = this.modalService.open(DetailPartModal, SMALL_CENTERED_CONFIG);
+        const ref: NgbModalRef = this.modalService.open(DetailPartModal, SCROLLABLE_CONFIG);
         ref.componentInstance.part = this.part;
     }
 
