@@ -35,11 +35,12 @@ export class PartService {
         this.partListChanged.emit();
     }
 
-    public edit(id: number, box: string, qty: number): void {
+    public edit(id: number, box: string, qty: number, attribs: Map<string, string>): void {
         let currentPart: Part = this.parts.get(id);
 
         currentPart.box = box;
         currentPart.qty = qty;
+        currentPart.setAttribs(attribs);
 
         this.partListChanged.emit();
     }

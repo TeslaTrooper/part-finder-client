@@ -10,13 +10,19 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Fach</span>
             </div>
-            <input type="text" class="form-control" id="box" formControlName="box">
+            <input type="text" class="form-control" formControlName="box">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Anzahl</span>
             </div>
-            <input type="text" class="form-control" id="qty" formControlName="qty">
+            <input type="text" class="form-control" formControlName="qty">
+        </div>
+        <div class="input-group mb-3" *ngFor="let attrib of part.attribs | keyvalue">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{attrib.key}}</span>
+            </div>
+            <input type="text" class="form-control" formControlName="{{attrib.key}}">
         </div>
     </div>
     <div class="modal-footer">
