@@ -5,24 +5,17 @@
     </button>
 </div>
 <div class="modal-body">
-    <table class="table table-sm table-borderless">
+    <table *ngIf="part.attribs.size == 0" class="mx-auto">
         <tbody>
-            <tr class="d-flex">
-                <td class="col-6">
-                    <p><strong>Name</strong></p>
-                </td>
-                <td class="col-6">
-                    <p>{{part?.name}}</p>
-                </td>
+            <tr>
+                <td><i class="pull-left oi oi-info mr-3"></i></td>
+                <td><span>Es wurden keine weiteren Eigenschaften definiert.</span></td>
             </tr>
-            <tr class="d-flex">
-                <td class="col-6">
-                    <p><strong>Fach</strong></p>
-                </td>
-                <td class="col-6">
-                    <p>{{part?.box}}</p>
-                </td>
-            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="part.attribs.size > 0" class="table table-sm table-borderless">
+        <tbody>
             <tr class="d-flex" *ngFor="let attrib of part.attribs | keyvalue">
                 <td class="col-6">
                     <p><strong>{{attrib.key}}</strong></p>
