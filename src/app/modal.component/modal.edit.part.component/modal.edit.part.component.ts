@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Part } from 'src/app/model/part';
-import { PartService } from 'src/app/services/PartService';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { PartService } from 'src/app/services/PartService';
+import { Part } from 'src/app/shared/part';
 
 @Component({
     selector: 'app-edit-part-modal',

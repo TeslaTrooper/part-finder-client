@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { Part } from '../model/part';
+import { Part } from '../shared/part';
 
 @Injectable({providedIn: 'root'})
 export class PartService {

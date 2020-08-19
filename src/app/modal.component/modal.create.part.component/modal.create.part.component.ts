@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormArray, Form, AbstractControl } 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PartService } from 'src/app/services/PartService';
-import { Part } from 'src/app/model/part';
-import { CustomValidators } from 'src/app/model/CustomValidators';
+import { Part } from 'src/app/shared/part';
+import { CustomValidators } from 'src/app/shared/CustomValidators';
 
 @Component({
     selector: 'app-create-part-modal',
