@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, Form, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PartService } from 'src/app/services/PartService';
 import { Part } from 'src/app/shared/part';
+import { genRandomKey } from 'src/app/shared/Util';
 import { CustomValidators } from 'src/app/shared/CustomValidators';
+import { Item } from './modal.create.part.pipe';
 
 @Component({
     selector: 'app-create-part-modal',
@@ -15,23 +17,26 @@ export class CreatePartModal implements OnInit {
 
     @Input() public part: Part;
 
-    public createPartForm: FormGroup;
-    public formArrays: AbstractControl[];
+    public createPartFormGroup: FormGroup;
+    public formArrayItems: Item[];
+    private lastInsertedFormArray: AbstractControl;
 
     constructor(private partService: PartService, public activeModal: NgbActiveModal) {
-        this.formArrays = [];
-        this.formArrays.push(this.createFormArray());
+        this.formArrayItems = [];
 
-        this.createPartForm = new FormGroup({
+        const item: Item = this.createFormArrayItem();
+        this.formArrayItems.push(item);
+
+        this.createPartFormGroup = new FormGroup({
             name: new FormControl('', Validators.required),
             box: new FormControl('', Validators.required),
             qty: new FormControl('', [Validators.required, Validators.pattern('[1-9][0-9]*')]),
-            customAttribs_0: this.formArrays[0]
+            ['customAttribs_' + item.key]: item.value
         });
     }
 
     ngOnInit(): void {
-        this.createPartForm.patchValue({
+        this.createPartFormGroup.patchValue({
             name: this.part.name,
             box: this.part.box,
             qty: this.part.qty
@@ -39,14 +44,14 @@ export class CreatePartModal implements OnInit {
     }
 
     public onPartCreate(): void {
-        const name: string = this.createPartForm.value.name;
-        const box: string = this.createPartForm.value.box;
-        const qty: number = this.createPartForm.value.qty;
+        const name: string = this.createPartFormGroup.value.name;
+        const box: string = this.createPartFormGroup.value.box;
+        const qty: number = this.createPartFormGroup.value.qty;
 
         const attribs: Map<string, string> = new Map();
-        for (const formArrayIndex in this.formArrays) {
-            const attrib: AbstractControl = this.createPartForm.get('customAttribs_' + formArrayIndex + ".0");
-            const attribValue: AbstractControl = this.createPartForm.get('customAttribs_' + formArrayIndex + ".1");
+        for (let formArray of this.formArrayItems) {
+            const attrib: AbstractControl = formArray.value.get("0");
+            const attribValue: AbstractControl = formArray.value.get("1");
 
             if (attrib.value !== "" && attribValue.value !== "")
                 attribs.set(attrib.value, attribValue.value);
@@ -60,26 +65,31 @@ export class CreatePartModal implements OnInit {
     }
 
     public onCheckCustomAttribute(event: KeyboardEvent, formArrayIndex: number): void {
-        const lastIndex: number = this.formArrays.length - 1;
+        const firstInputElementOfLastFormArray: AbstractControl = this.lastInsertedFormArray.get("0");
 
-        if (formArrayIndex != lastIndex)
-            return;
+        if (this.createPartFormGroup.valid && Validators.required(firstInputElementOfLastFormArray) == null) {
+            const item: Item = this.createFormArrayItem();
 
-        const firstInputElementOfLastFormArray: AbstractControl = this.createPartForm.get('customAttribs_' + lastIndex + ".0");
-
-        if (this.createPartForm.valid && Validators.required(firstInputElementOfLastFormArray) == null) {
-            const formArray: AbstractControl = this.createFormArray();
-
-            this.createPartForm.registerControl('customAttribs_' + (lastIndex + 1), formArray);
-            this.formArrays.push(formArray);
+            this.createPartFormGroup.registerControl('customAttribs_' + item.key, item.value);
+            this.formArrayItems.push(item);
         }
     }
 
-    private createFormArray(): AbstractControl {
-        return new FormArray([
+    public asMap(): Map<number, AbstractControl> {
+        const result: Map<number, AbstractControl> = new Map();
+        this.formArrayItems.forEach(e => result.set(e.key, e.value));
+
+        return result;
+    }
+
+    private createFormArrayItem(): Item {
+        const key: number = genRandomKey(0, 100, this.asMap());
+        this.lastInsertedFormArray = new FormArray([
             new FormControl(''),
             new FormControl('')
-        ], CustomValidators.groupValidator)
+        ], CustomValidators.groupValidator);
+
+        return { key: key, value: this.lastInsertedFormArray };
     }
 
 }

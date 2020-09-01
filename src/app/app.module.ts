@@ -14,6 +14,7 @@ import { PartListComponent } from './components/parts.component/part-list.compon
 import { PartComponent } from './components/parts.component/part-list.component/part.component/part.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatePartModal } from './modal.component/modal.create.part.component/modal.create.part.component';
+import { SkipEmptyElementPipe } from './modal.component/modal.create.part.component/modal.create.part.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CreatePartModal } from './modal.component/modal.create.part.component/m
         PartsComponent,
         PartListComponent,
         PartComponent,
-        CreatePartModal
+        CreatePartModal,
+        SkipEmptyElementPipe
     ],
     imports: [
         BrowserModule,

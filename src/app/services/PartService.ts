@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { Part } from '../shared/part';
+import { genRandomKey } from "../shared/Util";
 
 @Injectable({providedIn: 'root'})
 export class PartService {
@@ -24,13 +25,10 @@ export class PartService {
     }
 
     public add(part: Part): void {
-        let id = Math.random() * 100;
+        let key = genRandomKey(0, 100, this.parts);
 
-        while (this.parts.has(id))
-            id = Math.random() * 100;
-
-        part.id = id;
-        this.parts.set(id, part);
+        part.id = key;
+        this.parts.set(key, part);
 
         this.partListChanged.emit();
     }

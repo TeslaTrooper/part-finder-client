@@ -5,7 +5,7 @@
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="createPartForm" (ngSubmit)="onPartCreate()">
+    <form [formGroup]="createPartFormGroup" (ngSubmit)="onPartCreate()">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Name</span>
@@ -26,17 +26,17 @@
         </div>
 
         <!-- Custom attribs -->
-        <div *ngFor="let item of formArrays; let i = index" formArrayName="customAttribs_{{i}}">
+        <div *ngFor="let item of formArrayItems | skipEmptyElements" formArrayName="customAttribs_{{item.key}}">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <input type="text" formControlName="0" class="form-control" placeholder="Attribut" (keyup)="onCheckCustomAttribute($event, i)">
+                    <input type="text" formControlName="0" class="form-control" placeholder="Attribut" (keyup)="onCheckCustomAttribute($event, item.key)">
                 </div>
-                <input type="text" formControlName="1" class="form-control" placeholder="Wert" (keyup)="onCheckCustomAttribute($event, i)">
+                <input type="text" formControlName="1" class="form-control" placeholder="Wert" (keyup)="onCheckCustomAttribute($event, item.key)">
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" ngbAutoFocus class="btn btn-primary" [disabled]="!createPartForm.valid" (click)="onPartCreate()">Speichern</button>
+    <button type="button" ngbAutoFocus class="btn btn-primary" [disabled]="!createPartFormGroup.valid" (click)="onPartCreate()">Speichern</button>
     <button type="button" class="btn btn-secondary" (click)="activeModal.close('Cancel click')">Abbrechen</button>
 </div>
