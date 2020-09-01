@@ -25,7 +25,7 @@ export class PartService {
     }
 
     public add(part: Part): void {
-        let key = genRandomKey(0, 100, this.parts);
+        let key = genRandomKey(0, 100, Array.from(this.parts.keys()));
 
         part.id = key;
         this.parts.set(key, part);
