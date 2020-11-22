@@ -1,12 +1,12 @@
 export class Part {
 
-    id: number;
+    id: string;
     name: string;
     box: string;
     qty: number;
     attribs: Map<string, string>;
 
-    constructor(id: number, name: string, box: string, qty: number) {
+    constructor(id: string, name: string, box: string, qty: number) {
         this.id = id;
         this.name = name;
         this.box = box;

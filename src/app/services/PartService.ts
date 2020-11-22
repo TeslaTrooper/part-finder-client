@@ -1,12 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
+import { HttpService } from "./HttpService";
 import { Part } from '../shared/part';
 import { genRandomKey } from "../shared/Util";
 
 @Injectable({providedIn: 'root'})
 export class PartService {
 
-    private parts: Map<number, Part>;
+    private parts: Map<string, Part>;
     private searchToken: string;
 
     public partSelect: EventEmitter<number>;
@@ -14,7 +15,7 @@ export class PartService {
     public partEdit: EventEmitter<number>;
     public partListChanged: EventEmitter<void>;
 
-    constructor() {
+    constructor(private httpService: HttpService) {
         this.parts = new Map();
         this.searchToken = "";
 
@@ -22,20 +23,34 @@ export class PartService {
         this.partDelete = new EventEmitter();
         this.partEdit = new EventEmitter();
         this.partListChanged = new EventEmitter();
+
+        this.loadPartsInitially();
+    }
+
+    private loadPartsInitially(): void {
+        this.httpService.getParts().subscribe((partResponse: Map<string, Part>) => {
+            this.parts.clear();
+
+            partResponse.forEach((value: Part, key: string) =>
+                this.parts.set(key, value)
+            );
+
+            this.partListChanged.emit();
+        });
     }
 
     public add(part: Part): void {
-        let key = genRandomKey(0, 100, Array.from(this.parts.keys()));
+        // let key = genRandomKey(0, 100, Array.from(this.parts.keys()));
 
-        part.id = key;
-        this.parts.set(key, part);
+        // part.id = key;
+        // this.parts.set(key, part);
 
         this.partListChanged.emit();
     }
 
-    public edit(id: number, box: string, qty: number, attribs: Map<string, string>): void {
+    public edit(id: string, box: string, qty: number, attribs: Map<string, string>): void {
         let currentPart: Part = this.parts.get(id);
-
+        
         currentPart.box = box;
         currentPart.qty = qty;
         currentPart.setAttribs(attribs);
@@ -43,19 +58,19 @@ export class PartService {
         this.partListChanged.emit();
     }
 
-    public delete(id: number): void {
+    public delete(id: string): void {
         this.parts.delete(id);
         this.partListChanged.emit();
     }
 
-    public get(id: number): Part {
+    public get(id: string): Part {
         return this.parts.get(id);
     }
 
     public getParts(): Part[] {
         let result: Part[] = [];
 
-        this.parts.forEach((value: Part, key: number) => {
+        this.parts.forEach((value: Part, key: string) => {
             if (value.name.toLowerCase().match(this.searchToken.toLowerCase()))
                 result.push(value);
         });

@@ -56,7 +56,7 @@ export class CreatePartModal implements OnInit {
                 attribs.set(attrib.value, attribValue.value);
         }
 
-        const part: Part = new Part(0, name, box, qty);
+        const part: Part = new Part('0', name, box, qty);
         part.setAttribs(attribs);
 
         this.partService.add(part);
