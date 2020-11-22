@@ -1,10 +1,10 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-delete-title">{{ part.name }} löschen?</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modalService.dismiss('Cross click')">
+    <h5 class="modal-title" id="modal-delete-title">{{ part.name }} löschen?</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modalService.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
-    </button>
+    </button> -->
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="onPartDelete()">Ok</button>
-    <button type="button" class="btn btn-secondary" (click)="modalService.close('Cancel click')">Abbrechen</button>
+    <button ngbAutofocus type="button" class="btn btn-secondary" (click)="modalService.close('Cancel click')">Abbrechen</button>
 </div>

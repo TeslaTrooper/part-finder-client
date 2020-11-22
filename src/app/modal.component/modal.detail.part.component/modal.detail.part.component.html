@@ -1,8 +1,8 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-detail-title">Details von {{ part?.name }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <h5 class="modal-title" id="modal-detail-title">Details von {{ part?.name }}</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
-    </button>
+    </button> -->
 </div>
 <div class="modal-body">
     <table *ngIf="part.attribs.size == 0" class="mx-auto">
@@ -28,5 +28,7 @@
     </table>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Ok click')">Ok</button>
+    <button ngbAutofocus type="button" class="btn btn-primary" (click)="modal.close('Ok click')">
+        Ok
+    </button>
 </div>

@@ -5,3 +5,18 @@
 .input-group .input-group-text {
     width: 100%;
 }
+
+.modal-content {
+    //border-radius: initial;
+    box-shadow: 0px 0px 5px 2px #505050;
+
+    .modal-header {
+        background-color: #e9ecef;
+    }
+
+    .modal-footer {
+        button {
+            padding: 0.1rem 0.7rem 0.1rem 0.7rem;
+        }
+    }
+}

@@ -1,8 +1,8 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-create-title">{{ part?.name }} erstellen</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <h5 class="modal-title" id="modal-create-title">{{ part?.name }} erstellen</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
-    </button>
+    </button> -->
 </div>
 <div class="modal-body">
     <form [formGroup]="createPartFormGroup" (ngSubmit)="onPartCreate()">
@@ -37,6 +37,6 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" ngbAutoFocus class="btn btn-primary" [disabled]="!createPartFormGroup.valid" (click)="onPartCreate()">Speichern</button>
+    <button ngbAutofocus type="button" ngbAutoFocus class="btn btn-primary" [disabled]="!createPartFormGroup.valid" (click)="onPartCreate()">Speichern</button>
     <button type="button" class="btn btn-secondary" (click)="activeModal.close('Cancel click')">Abbrechen</button>
 </div>
