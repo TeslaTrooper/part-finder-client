@@ -1,8 +1,8 @@
 import { AbstractControl, Validators, ValidationErrors, FormArray } from "@angular/forms";
 
-export class CustomValidators {
+export namespace CustomValidators {
 
-    static groupValidator(formArray: FormArray): ValidationErrors | null {
+    export function groupValidator(formArray: FormArray): ValidationErrors | null {
         const callerFormControl: AbstractControl = formArray.controls[0];
         const callerFormControlHasValue: boolean = Validators.required(callerFormControl) == null;
 
