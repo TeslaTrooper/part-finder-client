@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PartService } from 'src/app/services/PartService';
-import { Part } from 'src/app/shared/part';
+import { Part } from 'src/app/entities/part';
 import { genRandomKey, getLast } from 'src/app/shared/Util';
 import { CustomValidators } from 'src/app/shared/CustomValidators';
 import { Item } from './modal.create.part.pipe';

@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { HttpService } from "./HttpService";
-import { Part } from '../shared/part';
+import { Part } from '../entities/part';
 import { genRandomKey } from "../shared/Util";
 
 @Injectable({providedIn: 'root'})

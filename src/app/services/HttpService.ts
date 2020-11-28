@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 
-import { Part } from '../shared/part';
+import { Part } from '../entities/part';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
