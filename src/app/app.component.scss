@@ -1,0 +1,41 @@
+@import 'bootstrap';
+
+app-navbar {
+    @extend .d-flex;
+    @extend .w-100;
+    @extend .position-fixed;
+    @extend .flex-grow-1;
+
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+
+    background-color: #303030;
+    box-shadow: 1px 0px 5px 0px black;
+    height: 3rem;
+    // transition: 200ms ease;
+    z-index: $zindex-sticky;
+}
+
+.main {
+    padding-top: 4rem;
+    // margin-left: 4rem;
+}
+
+// @include media-breakpoint-down(sm) {
+//     app-navbar {
+//         flex-direction: row;
+//         top: 0;
+//         width: 100vw;
+//         height: 4rem !important;
+//     }
+
+//     .main {
+//         margin-left: 0;
+//         margin-top: 4rem;
+//     }
+// }
+
+// app-navbar:hover {
+//     width: 7rem;
+// }

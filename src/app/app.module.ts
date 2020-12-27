@@ -13,6 +13,7 @@ import { DetailPartModal } from './modal.component/modal.detail.part.component/m
 import { PartsComponent } from './components/parts.component/parts.component';
 import { PartListComponent } from './components/parts.component/part-list.component/part-list.component';
 import { PartComponent } from './components/parts.component/part-list.component/part.component/part.component';
+import { NavbarComponent } from './components/navbar.component/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatePartModal } from './modal.component/modal.create.part.component/modal.create.part.component';
 import { SkipEmptyElementPipe } from './modal.component/modal.create.part.component/modal.create.part.pipe';
@@ -28,6 +29,7 @@ import { SkipEmptyElementPipe } from './modal.component/modal.create.part.compon
         PartsComponent,
         PartListComponent,
         PartComponent,
+        NavbarComponent,
         CreatePartModal,
         SkipEmptyElementPipe
     ],

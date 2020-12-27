@@ -1,0 +1,118 @@
+@import 'bootstrap';
+
+input[type="text"] {
+    background-color: #1d1d1d;
+    border-color: gray;
+    color: gray;
+
+    &:focus {
+        color: white;
+        border-color: #1d1d1d;
+        background-color: #1d1d1d;
+    }
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    .nav-item {
+        margin-left: 1rem;
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            flex-wrap: wrap;
+            color: gray;
+
+            span {
+                font-size: 1rem;
+
+                &.logo {
+                    // text-align: center;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    display: inline-flex;
+                    min-height: 3rem;
+                    padding: 0;
+                    align-items: center;
+                }
+            }
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        &:nth-child(4) {
+            margin-left: auto;
+        }
+
+        &:last-child {
+            margin-right: 1rem;
+
+            div {
+                flex-direction: row;
+                align-items: center;
+                display: flex;
+    
+                input {
+                    padding-right: 2rem;
+                }
+    
+                a {
+                    margin-left: -1.5rem;
+                    color: gray;
+                    align-items: center;
+                    // display: flex;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@mixin nav-item-last-child($input-visibility, $a-visibility, $nav-link-visibility) {
+    &:last-child {
+        div input {
+            display: $input-visibility;
+        }
+
+        div a {
+            display: $a-visibility;
+        }
+
+        a.nav-link {
+            display: $nav-link-visibility;
+        }
+    }
+}
+
+.nav-item-last-child-up-xs {
+    @include nav-item-last-child(flex, flex, none);
+}
+
+.nav-item-last-child-down-xs {
+    @include nav-item-last-child(none, none, flex);
+}
+
+// Big screen resolution
+@include media-breakpoint-up(xs) {
+    ul li.nav-item {
+        @include nav-item-last-child(flex, flex, none);
+    }
+}
+
+// Small screen resolution
+@include media-breakpoint-down(xs) {
+    ul li.nav-item {
+        @include nav-item-last-child(none, none, flex);
+    }
+}

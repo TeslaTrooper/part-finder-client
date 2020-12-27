@@ -1,0 +1,39 @@
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <span class="oi oi-menu"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link" #logo>
+            <span class="logo">Partfinder</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link" (click)="onPartCreate()" #plus>
+            <span class="oi oi-plus"></span>
+        </a>
+    </li>
+    <!-- <li class="nav-item">
+        <div>
+            <input type="text" class="form-control form-control-sm custom-input-style" placeholder="Suchbegriff" aria-label="Suchbegriff"
+            aria-describedby="basic-addon2" (keyup)="search($event)" #searchInputXs>
+            <a href="#" (click)="clearSearchInput()" #clearSearchXs>
+                <span class="oi oi-circle-x"></span>
+            </a>
+        </div>
+    </li> -->
+    <li class="nav-item" #listItem>
+        <div>
+            <input type="text" class="form-control form-control-sm custom-input-style" placeholder="Suchbegriff" aria-label="Suchbegriff"
+            aria-describedby="basic-addon2" (keyup)="search($event)" #searchInput>
+            <a href="#" (click)="clearSearchInput()" #clearSearch>
+                <span class="oi oi-circle-x"></span>
+            </a>
+        </div>
+                
+        <a href="#" class="nav-link" (click)="showSearchInput()" #showSearch>
+            <span class="oi oi-magnifying-glass"></span>
+        </a>
+    </li>
+</ul>
