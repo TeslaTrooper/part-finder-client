@@ -7,6 +7,7 @@ import { Part } from 'src/app/entities/part';
 import { genRandomKey, getLast } from 'src/app/shared/Util';
 import { CustomValidators } from 'src/app/shared/CustomValidators';
 import { Item } from './modal.create.part.pipe';
+import { AttributeResponse, PartDetailsResponse } from 'src/app/services/HttpService';
 
 @Component({
     selector: 'app-create-part-modal',
@@ -47,17 +48,18 @@ export class CreatePartModal implements OnInit {
         const box: string = this.createPartFormGroup.value.box;
         const qty: number = this.createPartFormGroup.value.qty;
 
-        const attribs: Map<string, string> = new Map();
+        const attribs: AttributeResponse[] = [];
         for (let formArray of this.formArrayItems) {
             const attrib: AbstractControl = formArray.value.get("0");
             const attribValue: AbstractControl = formArray.value.get("1");
 
             if (attrib.value !== "" && attribValue.value !== "")
-                attribs.set(attrib.value, attribValue.value);
+                attribs.push({ name: attrib.value, value: attribValue.value });
         }
 
-        const part: Part = new Part('0', name, box, qty);
-        part.setAttribs(attribs);
+        // const part: Part = new Part('0', name, box, qty);
+        const part: PartDetailsResponse = {name: name, location: box, qty: qty, attributes: attribs};
+        // part.setAttribs(attribs);
 
         this.partService.add(part);
         this.activeModal.close();

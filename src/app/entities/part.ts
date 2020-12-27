@@ -27,11 +27,11 @@ export class Part {
         const partDetails: PartDetailsResponse = partResponse.part;
         const attribs: Map<string, string> = new Map();
 
-        partDetails.attributes.forEach(a => 
+        partDetails.attributes.forEach(a =>
             attribs.set(a.name, a.value)
         );
-        
-        return new Part(partResponse.id, partDetails.name, 
+
+        return new Part(partResponse.id, partDetails.name,
             partDetails.location, partDetails.qty, attribs);
     }
 

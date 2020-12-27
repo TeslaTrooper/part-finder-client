@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { HttpService } from "./HttpService";
+import { HttpService, PartDetailsResponse } from "./HttpService";
 import { Part } from '../entities/part';
 import { genRandomKey } from "../shared/Util";
 
@@ -39,13 +39,17 @@ export class PartService {
         });
     }
 
-    public add(part: Part): void {
-        // let key = genRandomKey(0, 100, Array.from(this.parts.keys()));
-
-        // part.id = key;
-        // this.parts.set(key, part);
-
-        this.partListChanged.emit();
+    public add(part: PartDetailsResponse): void {
+        this.httpService.savePart(part).subscribe((id: string) => {
+            const attributes: Map<string, string> = new Map();
+            part.attributes.forEach(e => {
+                attributes.set(e.name, e.value);
+            });
+            const tmp: Part = new Part(id, part.name, part.location, part.qty, attributes);
+            this.parts.set(id, tmp);
+            
+            this.partListChanged.emit();
+        });
     }
 
     public edit(id: string, box: string, qty: number, attribs: Map<string, string>): void {
