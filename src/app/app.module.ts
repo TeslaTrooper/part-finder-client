@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './components/header.component/header.component';
 import { EditPartModal } from './modal.component/modal.edit.part.component/modal.edit.part.component';
 import { DeletePartModal } from './modal.component/modal.delete.part.component/modal.delete.part.component';
 import { DetailPartModal } from './modal.component/modal.detail.part.component/modal.detail.part.component';
@@ -22,7 +21,6 @@ import { SkipEmptyElementPipe } from './modal.component/modal.create.part.compon
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         EditPartModal,
         DeletePartModal,
         DetailPartModal,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,16 +7,13 @@ import { Part } from 'src/app/entities/part';
 import { genRandomKey, getLast } from 'src/app/shared/Util';
 import { CustomValidators } from 'src/app/shared/CustomValidators';
 import { Item } from './modal.create.part.pipe';
-import { AttributeResponse, PartDetailsResponse } from 'src/app/services/HttpService';
 
 @Component({
     selector: 'app-create-part-modal',
     templateUrl: './modal.create.part.component.html',
     styleUrls: ['../modal.component.scss']
 })
-export class CreatePartModal implements OnInit {
-
-    @Input() public part: Part;
+export class CreatePartModal {
 
     public createPartFormGroup: FormGroup;
     public formArrayItems: Item[];
@@ -33,14 +30,6 @@ export class CreatePartModal implements OnInit {
             qty: new FormControl('', [Validators.required, Validators.pattern('[1-9][0-9]*')]),
             ['customAttribs_' + item.key]: item.value
         });
-    }
-
-    ngOnInit(): void {
-        this.createPartFormGroup.patchValue({
-            name: this.part.name,
-            box: this.part.box,
-            qty: this.part.qty
-        })
     }
 
     public onPartCreate(): void {
