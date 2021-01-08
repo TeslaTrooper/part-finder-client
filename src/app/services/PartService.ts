@@ -1,9 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { HttpService, PartDetailsResponse } from "./HttpService";
+import { HttpService } from "./HttpService";
 import { Part } from '../entities/part';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PartService {
 
     private parts: Map<string, Part>;
@@ -42,24 +42,29 @@ export class PartService {
         this.httpService.savePart(part).subscribe((id: string) => {
             const tmp: Part = new Part(id, part.name, part.box, part.qty, part.attribs);
             this.parts.set(id, tmp);
-            
+
             this.partListChanged.emit();
         });
     }
 
-    public edit(id: string, box: string, qty: number, attribs: Map<string, string>): void {
-        let currentPart: Part = this.parts.get(id);
-        
-        currentPart.box = box;
-        currentPart.qty = qty;
-        currentPart.setAttribs(attribs);
+    public edit(updatedPart: Part): void {
+        this.httpService.editPart(updatedPart).subscribe((success: boolean) => {
+            if (!success)
+                return;
 
-        this.partListChanged.emit();
+            this.parts.set(updatedPart.id, updatedPart);
+            this.partListChanged.emit();
+        });
     }
 
     public delete(id: string): void {
-        this.parts.delete(id);
-        this.partListChanged.emit();
+        this.httpService.deletePart(id).subscribe((success: boolean) => {
+            if (!success)
+                return;
+
+            this.parts.delete(id);
+            this.partListChanged.emit();
+        });
     }
 
     public get(id: string): Part {

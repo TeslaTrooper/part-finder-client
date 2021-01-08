@@ -47,9 +47,9 @@ export class EditPartModal implements OnInit {
 
         this.part.attribs.forEach((value: string, key: string) =>
             newAttribValues.set(key, this.editPartForm.value[key])
-        )
+        );
 
-        this.partService.edit(this.part.id, tfBox, Number(tfQty), newAttribValues);
+        this.partService.edit(new Part(this.part.id, this.part.name, tfBox, Number(tfQty), newAttribValues));
         this.activeModal.close();
     }
 

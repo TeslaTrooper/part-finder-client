@@ -41,6 +41,25 @@ export class HttpService {
             }));
     }
 
+    public deletePart(id: string): Observable<boolean> {
+        return this.http.delete<PartResponse>(this.BACKEND_BASE_URL.concat('/parts/' + id))
+            .pipe(delay(1000), catchError(this.handleError), map((response) =>
+                response.id === id
+            ));
+    }
+
+    public editPart(part: Part): Observable<boolean> {
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+            observe: 'response' as 'body'
+        };
+
+        return this.http.put<Response>(this.BACKEND_BASE_URL.concat('/parts/'), Part.toDto(part), httpOptions)
+            .pipe(delay(1000), catchError(this.handleError), map((response) =>
+                response.status == 200
+            ));
+    }
+
     private handleError(error: HttpErrorResponse): Observable<never> {
         if (error.error instanceof ErrorEvent)
             console.error('An error occurred:', error.error.message);
