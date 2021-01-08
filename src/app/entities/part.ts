@@ -1,8 +1,8 @@
-import { PartDetailsResponse, PartResponse } from '../services/HttpService';
+import { AttributeResponse, PartDetailsResponse, PartResponse } from '../services/HttpService';
 
 export class Part {
 
-    id: string;
+    readonly id: string;
     name: string;
     box: string;
     qty: number;
@@ -33,6 +33,21 @@ export class Part {
 
         return new Part(partResponse.id, partDetails.name,
             partDetails.location, partDetails.qty, attribs);
+    }
+
+    static toDto(part: Part): PartResponse | PartDetailsResponse {
+        let attributes: AttributeResponse[] = [];
+        part.attribs.forEach((value: string, key: string) =>
+            attributes.push({ name: key, value: value })
+        );
+
+        let details: PartDetailsResponse =
+            { name: part.name, location: part.box, qty: part.qty, attributes: attributes };
+
+        if (part.id == undefined)
+            return details
+
+        return { id: part.id, part: details };
     }
 
 }

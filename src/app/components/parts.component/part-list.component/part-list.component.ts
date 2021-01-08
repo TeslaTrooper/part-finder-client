@@ -33,7 +33,7 @@ export class PartListComponent {
         const qty: number = this.newPartForm.value.qty;
 
         const ref: NgbModalRef = this.modalService.open(CreatePartModal, SCROLLABLE_CONFIG);
-        ref.componentInstance.part = new Part('0', name, box, qty);
+        ref.componentInstance.part = new Part(undefined, name, box, qty);
 
         this.newPartForm.reset();
     }

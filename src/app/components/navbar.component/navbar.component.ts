@@ -63,7 +63,7 @@ export class NavbarComponent {
 
     public onPartCreate(): void {
         const ref: NgbModalRef = this.modalService.open(CreatePartModal, SCROLLABLE_CONFIG);
-        ref.componentInstance.part = new Part('0', '', '', 0);
+        ref.componentInstance.part = new Part(undefined, '', '', 0);
     }
 
 }

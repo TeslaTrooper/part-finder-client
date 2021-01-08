@@ -27,13 +27,13 @@ export class HttpService {
             }));
     }
 
-    public savePart(part: PartDetailsResponse): Observable<string> {
+    public savePart(part: Part): Observable<string> {
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             observe: 'response' as 'body'
         };
 
-        return this.http.post<Response>(this.BACKEND_BASE_URL.concat('/parts'), part, httpOptions)
+        return this.http.post<Response>(this.BACKEND_BASE_URL.concat('/parts'), Part.toDto(part), httpOptions)
             .pipe(delay(1000), catchError(this.handleError), map((response: Response) => {
                 const locationURI: string = response.headers.get(this.HEADER_LOCATION);
 
