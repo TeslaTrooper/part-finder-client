@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Part } from 'src/app/entities/part';
-import { DetailPartModal } from 'src/app/modal.component/modal.detail.part.component/modal.detail.part.component';
-import { DeletePartModal } from 'src/app/modal.component/modal.delete.part.component/modal.delete.part.component';
-import { EditPartModal } from 'src/app/modal.component/modal.edit.part.component/modal.edit.part.component';
+import { DetailPartModal } from 'src/app/components/modal.component/modal.detail.part.component/modal.detail.part.component';
+import { DeletePartModal } from 'src/app/components/modal.component/modal.delete.part.component/modal.delete.part.component';
+import { EditPartModal } from 'src/app/components/modal.component/modal.edit.part.component/modal.edit.part.component';
 import { ModalService, SMALL_CENTERED_CONFIG, SCROLLABLE_CONFIG } from "src/app/services/ModalService";
 
 @Component({

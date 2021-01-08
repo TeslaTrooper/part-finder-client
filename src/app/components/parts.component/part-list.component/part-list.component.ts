@@ -4,7 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 import { Part } from 'src/app/entities/part';
 import { PartService } from 'src/app/services/PartService';
-import { CreatePartModal } from 'src/app/modal.component/modal.create.part.component/modal.create.part.component';
+import { CreatePartModal } from 'src/app/components/modal.component/modal.create.part.component/modal.create.part.component';
 import { ModalService, SCROLLABLE_CONFIG } from 'src/app/services/ModalService';
 
 @Component({
