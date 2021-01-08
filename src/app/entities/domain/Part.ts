@@ -1,4 +1,4 @@
-import { AttributeResponse, PartDetailsResponse, PartResponse } from '../services/HttpService';
+import { PartDTO, AttributeDTO, PartDetailsDTO } from "../dto/PartDTO";
 
 export class Part {
 
@@ -23,8 +23,8 @@ export class Part {
         this.attribs = attribs;
     }
 
-    static toDomain(partResponse: PartResponse): Part {
-        const partDetails: PartDetailsResponse = partResponse.part;
+    static toDomain(partResponse: PartDTO): Part {
+        const partDetails: PartDetailsDTO = partResponse.part;
         const attribs: Map<string, string> = new Map();
 
         partDetails.attributes.forEach(a =>
@@ -35,13 +35,13 @@ export class Part {
             partDetails.location, partDetails.qty, attribs);
     }
 
-    static toDto(part: Part): PartResponse | PartDetailsResponse {
-        let attributes: AttributeResponse[] = [];
+    static toDto(part: Part): PartDTO | PartDetailsDTO {
+        let attributes: AttributeDTO[] = [];
         part.attribs.forEach((value: string, key: string) =>
             attributes.push({ name: key, value: value })
         );
 
-        let details: PartDetailsResponse =
+        let details: PartDetailsDTO =
             { name: part.name, location: part.box, qty: part.qty, attributes: attributes };
 
         if (part.id == undefined)

@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import { Part } from 'src/app/entities/part';
+import { Part } from 'src/app/entities/domain/Part';
 import { CreatePartModal } from 'src/app/components/modal.component/modal.create.part.component/modal.create.part.component';
 import { ModalService, SCROLLABLE_CONFIG } from 'src/app/services/ModalService';
 import { PartService } from 'src/app/services/PartService';

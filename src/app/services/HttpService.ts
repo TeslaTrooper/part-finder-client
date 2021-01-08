@@ -4,7 +4,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, of, throwError } from 'rxjs';
 import { map, delay, catchError } from 'rxjs/operators';
 
-import { Part } from '../entities/part';
+import { Part } from 'src/app/entities/domain/Part';
+import { PartDTO, PartListDTO } from '../entities/dto/PartDTO';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
@@ -15,7 +16,7 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     public getParts(): Observable<Map<string, Part>> {
-        return this.http.get<PartListResponse>(this.BACKEND_BASE_URL.concat('/parts'))
+        return this.http.get<PartListDTO>(this.BACKEND_BASE_URL.concat('/parts'))
             .pipe(delay(1000), map(payload => {
                 const result: Map<string, Part> = new Map();
 
@@ -42,7 +43,7 @@ export class HttpService {
     }
 
     public deletePart(id: string): Observable<boolean> {
-        return this.http.delete<PartResponse>(this.BACKEND_BASE_URL.concat('/parts/' + id))
+        return this.http.delete<PartDTO>(this.BACKEND_BASE_URL.concat('/parts/' + id))
             .pipe(delay(1000), catchError(this.handleError), map((response) =>
                 response.id === id
             ));
@@ -70,26 +71,4 @@ export class HttpService {
         return throwError('Something bad happened; please try again later.');
     }
 
-}
-
-
-interface PartListResponse {
-    parts: PartResponse[];
-}
-
-export interface PartResponse {
-    id: string;
-    part: PartDetailsResponse;
-}
-
-export interface PartDetailsResponse {
-    name: string;
-    location: string;
-    qty: number;
-    attributes: AttributeResponse[];
-}
-
-export interface AttributeResponse {
-    name: string;
-    value: string;
 }

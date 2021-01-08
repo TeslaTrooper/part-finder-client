@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { HttpService } from "./HttpService";
-import { Part } from '../entities/part';
+import { Part } from 'src/app/entities/domain/Part';
 
 @Injectable({ providedIn: 'root' })
 export class PartService {

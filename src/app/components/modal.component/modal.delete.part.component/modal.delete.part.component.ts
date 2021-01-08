@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PartService } from 'src/app/services/PartService';
-import { Part } from 'src/app/entities/part';
+import { Part } from 'src/app/entities/domain/Part';
 
 @Component({
     selector: 'app-delete-part-modal',
