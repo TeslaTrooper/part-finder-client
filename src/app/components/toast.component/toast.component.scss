@@ -1,0 +1,11 @@
+@import 'bootstrap';
+
+ngb-toast {
+    position: fixed;
+    bottom: 0;
+    margin: 0.5em;
+    z-index: 1200;
+
+    @extend .bg-success;
+    @extend .text-light;
+}

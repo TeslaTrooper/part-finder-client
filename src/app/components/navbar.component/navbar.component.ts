@@ -60,6 +60,8 @@ export class NavbarComponent {
 
         this.renderer.removeStyle(this.plus.nativeElement, 'display');
         this.renderer.removeStyle(this.logo.nativeElement, 'display');
+
+        this.search(undefined);
     }
 
     public onPartCreate(): void {

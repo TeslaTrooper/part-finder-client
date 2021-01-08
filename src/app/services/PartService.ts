@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 
 import { HttpService } from "./HttpService";
 import { Part } from 'src/app/entities/domain/Part';
+import { ToastService } from './ToastService';
 
 @Injectable({ providedIn: 'root' })
 export class PartService {
@@ -14,7 +15,7 @@ export class PartService {
     public partEdit: EventEmitter<number>;
     public partListChanged: EventEmitter<void>;
 
-    constructor(private httpService: HttpService) {
+    constructor(private httpService: HttpService, private toastService: ToastService) {
         this.parts = new Map();
         this.searchToken = "";
 
@@ -35,6 +36,7 @@ export class PartService {
             );
 
             this.partListChanged.emit();
+            this.toastService.push("Laden erfolgreich", "Liste wurde erfolgreich aktualisiert");
         });
     }
 
@@ -44,6 +46,7 @@ export class PartService {
             this.parts.set(id, tmp);
 
             this.partListChanged.emit();
+            this.toastService.push("Erstellen erfolgreich", "Teil wurde erfolgreich erstellt");
         });
     }
 
@@ -54,6 +57,7 @@ export class PartService {
 
             this.parts.set(updatedPart.id, updatedPart);
             this.partListChanged.emit();
+            this.toastService.push("Bearbeiten erfolgreich", "Teil wurde erfolgreich bearbeitet");
         });
     }
 
@@ -64,6 +68,7 @@ export class PartService {
 
             this.parts.delete(id);
             this.partListChanged.emit();
+            this.toastService.push("Löschen erfolgreich", "Teil wurde erfolgreich gelöscht");
         });
     }
 
