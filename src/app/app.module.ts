@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatePartModal } from './components//modal.component/modal.create.part.component/modal.create.part.component';
 import { SkipEmptyElementPipe } from './components//modal.component/modal.create.part.component/modal.create.part.pipe';
 import { ToastComponent } from "./components/toast.component/toast.component";
+import { SidebarComponent } from "./components/sidebar.component/sidebar.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { ToastComponent } from "./components/toast.component/toast.component";
         NavbarComponent,
         CreatePartModal,
         SkipEmptyElementPipe,
-        ToastComponent
+        ToastComponent,
+        SidebarComponent,
     ],
     imports: [
         BrowserModule,

@@ -5,6 +5,7 @@ import { Part } from 'src/app/entities/domain/Part';
 import { CreatePartModal } from 'src/app/components/modal.component/modal.create.part.component/modal.create.part.component';
 import { ModalService, SCROLLABLE_CONFIG } from 'src/app/services/ModalService';
 import { PartService } from 'src/app/services/PartService';
+import { NavbarService } from 'src/app/services/NavbarService';
 
 @Component({
     selector: 'app-navbar',
@@ -13,6 +14,7 @@ import { PartService } from 'src/app/services/PartService';
 })
 export class NavbarComponent {
 
+    @ViewChild('menu') menu: ElementRef;
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('showSearch') showSearch: ElementRef;
     @ViewChild('clearSearch') clearSearch: ElementRef;
@@ -21,8 +23,10 @@ export class NavbarComponent {
     @ViewChild('logo') logo: ElementRef;
 
     searchOnSmallDeviceDisplayed: boolean = false;
+    isSidebarVisible: boolean = false;
 
     constructor(private partService: PartService,
+        private navbarService: NavbarService,
         private renderer: Renderer2,
         private modalService: ModalService) { }
 
@@ -67,6 +71,17 @@ export class NavbarComponent {
     public onPartCreate(): void {
         const ref: NgbModalRef = this.modalService.open(CreatePartModal, SCROLLABLE_CONFIG);
         ref.componentInstance.part = new Part(undefined, '', '', 0);
+    }
+
+    public onSidebarVisibilityChange(): void {
+        this.isSidebarVisible = !this.isSidebarVisible;
+
+        if (this.isSidebarVisible)
+            this.renderer.setStyle(this.menu.nativeElement, 'color', 'white');
+        else
+            this.renderer.removeStyle(this.menu.nativeElement, 'color');
+            
+        this.navbarService.sidebarVisibilityChange.emit(this.isSidebarVisible);
     }
 
 }
